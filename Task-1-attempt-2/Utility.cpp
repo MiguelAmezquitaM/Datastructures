@@ -21,6 +21,6 @@ template <typename T>
 void utl::exchange(T *e1, T *e2)
 {
     T temp = *e1;
-    *e1 = e2;
+    *e1 = *e2;
     *e2 = temp;
 }

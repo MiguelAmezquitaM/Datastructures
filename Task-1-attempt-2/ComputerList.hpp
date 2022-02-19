@@ -6,7 +6,7 @@
 #include <iomanip>
 
 #include "Computer.hpp"
-#include "./Services/Utility.hpp"
+#include "Utility.hpp"
 
 namespace pcl 
 {
@@ -34,5 +34,7 @@ namespace pcl
         int searchElementByID(int id);
     };
 }
+
+#include "ComputerList.cpp"
 
 #endif

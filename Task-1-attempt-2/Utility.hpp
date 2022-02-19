@@ -18,4 +18,6 @@ namespace utl
     void exchange(T* e1, T* e2);
 }
 
+#include "Utility.cpp"
+
 #endif
