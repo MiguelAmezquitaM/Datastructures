@@ -1,8 +1,6 @@
 #include "Utility.hpp"
 
-using namespace utl;
-
-void clearConsole()
+void utl::clearConsole()
 {
 #ifdef WINDOWS
     system("cls");
@@ -11,9 +9,17 @@ void clearConsole()
 #endif
 }
 
-void pause()
+void utl::pause()
 {
     std::cout << "\n\nPress any key to continue...\n";
     std::cin.ignore();
     std::cin.get();
+}
+
+template <typename T>
+void utl::exchange(T *e1, T *e2)
+{
+    T temp = *e1;
+    *e1 = e2;
+    *e2 = temp;
 }

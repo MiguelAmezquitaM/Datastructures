@@ -12,6 +12,10 @@ namespace utl
 
     // pause the ejecution
     void pause();
+
+    // exchange
+    template<typename T>
+    void exchange(T* e1, T* e2);
 }
 
 #endif
