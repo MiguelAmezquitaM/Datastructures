@@ -1,3 +1,5 @@
+#pragma once
+
 #include "ComputerList.hpp"
 
 using namespace std;
