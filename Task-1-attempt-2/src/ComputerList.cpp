@@ -13,8 +13,8 @@ using namespace utl; // Utils namespace
 #define spc setw(20)
 
 // helpers function related to print()
-void print_header_computer();
-void print_row_computer(Computer pc);
+static void print_header_computer();
+static void print_row_computer(Computer pc); // static: isn't avaible outside of module
 
 void ComputerList::print()
 {
@@ -42,12 +42,12 @@ void ComputerList::print(int index)
     {
         print_header_computer();
         print_row_computer(list[index]);
-    }
+    }   
 
     pause();
 }
 
-void print_header_computer()
+static void print_header_computer()
 {
     cout << "ID" << spc << "Trademarker" << spc << "Model" << spc
          << "Memory Capacity" << spc << "Storage Capacity" << spc
@@ -55,7 +55,7 @@ void print_header_computer()
          << endl;
 }
 
-void print_row_computer(Computer pc)
+static void print_row_computer(Computer pc)
 {
     cout << pc.id << spc << pc.trademark << spc << pc.model << spc
          << pc.memoryCapacity << spc << pc.storageCapacity << spc

@@ -12,6 +12,29 @@ using namespace menu;
 #define h2 "      Selecciona una opcion\n"
 #define h3 "=================================\n\n"
 
+// Complements main menu
+static int main_menu_body();
+
+// interface to agregate data from console
+static int fillComputerList(ComputerList *);
+
+// interface to search computers from console
+static void searchComputerById(ComputerList *);
+
+// interfaces to sort list
+static void sortby_menu(ComputerList *);
+static int sortby_menu_body_1();
+static int sortby_menu_body_2();
+
+// setting for filters
+static void filter_menu(ComputerList *listOfComputers);
+
+// **
+static void print_header();
+
+
+// implementations ------------------------------------------------
+
 void menu::main_menu(ComputerList *listOfComputers)
 {
     bool run = true;
@@ -21,6 +44,7 @@ void menu::main_menu(ComputerList *listOfComputers)
     while (run)
     {
         opc = main_menu_body();
+        
         switch (opc)
         {
         case 1:
@@ -36,6 +60,7 @@ void menu::main_menu(ComputerList *listOfComputers)
         case 4:
             break;
         case 5:
+            sortby_menu(listOfComputers);
             break;
         case 6:
             run = false;
@@ -46,7 +71,7 @@ void menu::main_menu(ComputerList *listOfComputers)
     }
 }
 
-int menu::main_menu_body()
+static int main_menu_body()
 {
     int opc;
 
@@ -66,7 +91,7 @@ int menu::main_menu_body()
     return opc;
 }
 
-int menu::fillComputerList(ComputerList *listOfComputers)
+static int fillComputerList(ComputerList *listOfComputers)
 {
     int len;
     int alen = listOfComputers->len;
@@ -105,7 +130,7 @@ int menu::fillComputerList(ComputerList *listOfComputers)
     return len;
 }
 
-void menu::searchComputerById(ComputerList *listOfComputers)
+static void searchComputerById(ComputerList *listOfComputers)
 {
     int id;
     int index;
@@ -115,11 +140,88 @@ void menu::searchComputerById(ComputerList *listOfComputers)
     cin >> id;
 
     index = listOfComputers->searchElementByID(id);
-
     listOfComputers->print(index);
 }
 
-void menu::print_header()
+static void filter_menu(ComputerList *listOfComputers)
+{
+}
+
+static void sortby_menu(ComputerList *listOfComputers)
+{
+    int opc;
+    int mode;
+
+    opc = sortby_menu_body_1();
+    if (opc == 5)
+        return;
+
+    mode = sortby_menu_body_2();
+    if (mode == 3)
+        return;
+
+    switch (opc)
+    {
+    case 1:
+        listOfComputers->sortByTrademark(mode == 1 ? "a" : "m");
+        break;
+    case 2:
+        listOfComputers->sortByClockSpeed(mode == 1 ? "a" : "m");
+        break;
+    case 3:
+        listOfComputers->sortByMemoryCapacity(mode == 1 ? "a" : "m");
+        break;
+    case 4:
+        listOfComputers->sortByStorageCapacity(mode == 1 ? "a" : "m");
+        break;
+    default:
+        break;
+    }
+}
+
+static int sortby_menu_body_1()
+{
+    int opc = 0;
+
+    while (opc < 1 || opc > 5)
+    {
+        clearConsole();
+        print_header();
+        cout << "You want to sort the list by...\n\n";
+
+        cout << "1. Trademark\n";
+        cout << "2. Clock speed\n";
+        cout << "3. Memory capacity\n";
+        cout << "4. Storage capacity\n";
+        cout << "5. Cancel\n\n";
+
+        cout << "Option: ";
+        cin >> opc;
+    }
+
+    return opc;
+}
+
+static int sortby_menu_body_2()
+{
+    int mode = 0;
+    while (mode < 1 || mode > 3)
+    {
+        clearConsole();
+        print_header();
+        cout << "Select the mode of sort...\n\n";
+
+        cout << "1. Smallest to largest\n";
+        cout << "2. Largest to Smallest\n";
+        cout << "3. Cancel\n\n";
+
+        cout << "Option: ";
+        cin >> mode;
+    }
+    return mode;
+}
+
+static void print_header()
 {
     cout << h1 << h2 << h3;
 }
