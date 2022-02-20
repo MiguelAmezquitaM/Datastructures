@@ -1,9 +1,5 @@
-#pragma once
-
-#ifndef utility_hpp
-#define utility_hpp
-
-#include <iostream>
+#ifndef Utility_hpp
+#define Utility_hpp
 
 namespace utl
 {
@@ -19,5 +15,4 @@ namespace utl
 }
 
 #include "Utility.cpp"
-
 #endif

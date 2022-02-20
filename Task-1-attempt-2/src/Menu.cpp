@@ -1,25 +1,22 @@
 #pragma once
-#include "Menu.hpp"
 
-using namespace menu;
+#include "Menu.hpp"
+#include "Utility.hpp"
+
 using namespace pcl;
 using namespace utl;
 using namespace std;
+using namespace menu;
 
 #define h1 "=================================\n"
 #define h2 "      Selecciona una opcion\n"
 #define h3 "=================================\n\n"
 
-int main_menu_body();
-int fillComputerList(ComputerList list);
-void searchComputerById(ComputerList list);
-void print_header();
-
-void menu::main_menu(ComputerList listOfComputers)
+void menu::main_menu(ComputerList *listOfComputers)
 {
     bool run = true;
-    int opc = listOfComputers.len;
-    int len = 10;
+    int opc;
+    int len = listOfComputers->len;
 
     while (run)
     {
@@ -28,9 +25,10 @@ void menu::main_menu(ComputerList listOfComputers)
         {
         case 1:
             len = fillComputerList(listOfComputers);
+            listOfComputers->len += len;
             break;
         case 2:
-            listOfComputers.print();
+            listOfComputers->print();
             break;
         case 3:
             searchComputerById(listOfComputers);
@@ -48,14 +46,14 @@ void menu::main_menu(ComputerList listOfComputers)
     }
 }
 
-int main_menu_body()
+int menu::main_menu_body()
 {
     int opc;
 
     clearConsole();
     print_header();
 
-    cout << "1. Fill list of computers\n";
+    cout << "1. Fill list of computers (or append)\n";
     cout << "2. List computers\n";
     cout << "3. Search computer by ID\n";
     cout << "4. Filters\n";
@@ -68,16 +66,17 @@ int main_menu_body()
     return opc;
 }
 
-int fillComputerList(ComputerList listOfComputers)
+int menu::fillComputerList(ComputerList *listOfComputers)
 {
     int len;
-    pcp::Computer *list = listOfComputers.list;
+    int alen = listOfComputers->len;
+    pcp::Computer *list = listOfComputers->list;
 
     clearConsole();
     cout << "- How many computers do you want to add?  ";
     cin >> len;
 
-    for (int i = 0; i < len; i++)
+    for (int i = alen; i < len + alen; i++)
     {
         clearConsole();
         cout << "=========================\n";
@@ -106,7 +105,7 @@ int fillComputerList(ComputerList listOfComputers)
     return len;
 }
 
-void searchComputerById(ComputerList listOfComputers)
+void menu::searchComputerById(ComputerList *listOfComputers)
 {
     int id;
     int index;
@@ -115,13 +114,12 @@ void searchComputerById(ComputerList listOfComputers)
     cout << "Input id: ";
     cin >> id;
 
-    index = listOfComputers.searchElementByID(id);
+    index = listOfComputers->searchElementByID(id);
 
-    listOfComputers.print(index);
-    pause();
+    listOfComputers->print(index);
 }
 
-void print_header()
+void menu::print_header()
 {
     cout << h1 << h2 << h3;
 }

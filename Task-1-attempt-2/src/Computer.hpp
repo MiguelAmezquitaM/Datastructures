@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef computer_hpp
 #define computer_hpp
 

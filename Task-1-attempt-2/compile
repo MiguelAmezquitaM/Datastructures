@@ -1,0 +1,1 @@
+g++ src/Main.cpp -o build/output

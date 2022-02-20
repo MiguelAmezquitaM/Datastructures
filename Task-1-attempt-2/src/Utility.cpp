@@ -1,5 +1,8 @@
 #pragma once
+
 #include "Utility.hpp"
+
+#include <iostream>
 
 void utl::clearConsole()
 {

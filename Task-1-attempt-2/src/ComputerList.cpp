@@ -1,6 +1,7 @@
-#pragma once
+#include <iomanip>
 
 #include "ComputerList.hpp"
+#include "Utility.hpp"
 
 using namespace std;
 
@@ -18,11 +19,16 @@ void print_row_computer(Computer pc);
 void ComputerList::print()
 {
     clearConsole();
-    print_header_computer();
 
-    for (int i = 0; i < len; i++)
-        print_row_computer(list[i]);
+    if (len == 0)
+        cout << "List is empty!\n";
+    else
+    {
+        print_header_computer();
 
+        for (int i = 0; i < len; i++)
+            print_row_computer(list[i]);
+    }
     pause();
 }
 
@@ -60,10 +66,10 @@ void print_row_computer(Computer pc)
 
 int ComputerList::searchElementByID(int id)
 {
-    for(int i = 0; i < len; i++)
-        if(list[i].id == id)
+    for (int i = 0; i < len; i++)
+        if (list[i].id == id)
             return i;
-    
+
     return -1;
 }
 
@@ -78,7 +84,7 @@ void ComputerList::sortByClockSpeed(string mode)
         p1 = list[i].clockSpeed;
         p2 = list[j].clockSpeed;
 
-        while(mode == "a" ? p1 > p2 : p2 > p1)
+        while (mode == "a" ? p1 > p2 : p2 > p1)
         {
             exchange(&list[i--], &list[j--]);
             p1 = list[i].clockSpeed;
@@ -98,7 +104,7 @@ void ComputerList::sortByMemoryCapacity(string mode)
         p1 = list[i].memoryCapacity;
         p2 = list[j].memoryCapacity;
 
-        while(mode == "a" ? p1 > p2 : p2 > p1)
+        while (mode == "a" ? p1 > p2 : p2 > p1)
         {
             exchange(&list[i--], &list[j--]);
             p1 = list[i].memoryCapacity;
@@ -118,7 +124,7 @@ void ComputerList::sortByStorageCapacity(string mode)
         p1 = list[i].storageCapacity;
         p2 = list[j].storageCapacity;
 
-        while(mode == "a" ? p1 > p2 : p2 > p1)
+        while (mode == "a" ? p1 > p2 : p2 > p1)
         {
             exchange(&list[i--], &list[j--]);
             p1 = list[i].storageCapacity;
@@ -138,7 +144,7 @@ void ComputerList::sortByTrademark(string mode)
         p1 = list[i].trademark;
         p2 = list[j].trademark;
 
-        while(mode == "a" ? p1 > p2 : p2 > p1)
+        while (mode == "a" ? p1 > p2 : p2 > p1)
         {
             exchange(&list[i--], &list[j--]);
             p1 = list[i].trademark;
@@ -146,4 +152,3 @@ void ComputerList::sortByTrademark(string mode)
         }
     }
 }
-

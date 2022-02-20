@@ -1,19 +1,14 @@
-#pragma once
-
-#ifndef computerlist_hpp
-#define computerlist_hpp
-
-#include <iomanip>
+#ifndef ComputerList_hpp
+#define ComputerList_hpp
 
 #include "Computer.hpp"
-#include "Utility.hpp"
 
 namespace pcl 
 {
     struct ComputerList
     {
         // list
-        pcp::Computer list[100];
+        pcp::Computer *list;
 
         // length of list (static)
         int len;
@@ -36,5 +31,4 @@ namespace pcl
 }
 
 #include "ComputerList.cpp"
-
 #endif
