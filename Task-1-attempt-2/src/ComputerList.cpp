@@ -42,14 +42,14 @@ void ComputerList::print(int index)
     {
         print_header_computer();
         print_row_computer(list[index]);
-    }   
+    }
 
     pause();
 }
 
 static void print_header_computer()
 {
-    cout << "ID" << spc << "Trademarker" << spc << "Model" << spc
+    cout << setw(10) << "ID" << spc << "Trademarker" << spc << "Model" << spc
          << "Memory Capacity" << spc << "Storage Capacity" << spc
          << "Clock speed" << endl
          << endl;
@@ -57,7 +57,7 @@ static void print_header_computer()
 
 static void print_row_computer(Computer pc)
 {
-    cout << pc.id << spc << pc.trademark << spc << pc.model << spc
+    cout << setw(10) << pc.id << spc << pc.trademark << spc << pc.model << spc
          << pc.memoryCapacity << spc << pc.storageCapacity << spc
          << pc.clockSpeed << endl;
 }
@@ -73,82 +73,18 @@ int ComputerList::searchElementByID(int id)
     return -1;
 }
 
-void ComputerList::sortByClockSpeed(string mode)
+template <typename T>
+void ComputerList::sortByField(T field, Mode mode)
 {
-    int i, j;
-    float p1, p2;
+    int i = 0, j = 0;
 
     for (i = 0; i < len - 1; i++)
     {
         j = i + 1;
-        p1 = list[i].clockSpeed;
-        p2 = list[j].clockSpeed;
+        while (i >= 0 && (mode == smallesto
+                    ? list[i].get(field) > list[j].get(field)
+                    : list[j].get(field) > list[i].get(field)))
 
-        while (mode == "a" ? p1 > p2 : p2 > p1)
-        {
             exchange(&list[i--], &list[j--]);
-            p1 = list[i].clockSpeed;
-            p2 = list[j].clockSpeed;
-        }
-    }
-}
-
-void ComputerList::sortByMemoryCapacity(string mode)
-{
-    int i, j;
-    int p1, p2;
-
-    for (i = 0; i < len - 1; i++)
-    {
-        j = i + 1;
-        p1 = list[i].memoryCapacity;
-        p2 = list[j].memoryCapacity;
-
-        while (mode == "a" ? p1 > p2 : p2 > p1)
-        {
-            exchange(&list[i--], &list[j--]);
-            p1 = list[i].memoryCapacity;
-            p2 = list[j].memoryCapacity;
-        }
-    }
-}
-
-void ComputerList::sortByStorageCapacity(string mode)
-{
-    int i, j;
-    int p1, p2;
-
-    for (i = 0; i < len - 1; i++)
-    {
-        j = i + 1;
-        p1 = list[i].storageCapacity;
-        p2 = list[j].storageCapacity;
-
-        while (mode == "a" ? p1 > p2 : p2 > p1)
-        {
-            exchange(&list[i--], &list[j--]);
-            p1 = list[i].storageCapacity;
-            p2 = list[j].storageCapacity;
-        }
-    }
-}
-
-void ComputerList::sortByTrademark(string mode)
-{
-    int i, j;
-    string p1, p2;
-
-    for (i = 0; i < len - 1; i++)
-    {
-        j = i + 1;
-        p1 = list[i].trademark;
-        p2 = list[j].trademark;
-
-        while (mode == "a" ? p1 > p2 : p2 > p1)
-        {
-            exchange(&list[i--], &list[j--]);
-            p1 = list[i].trademark;
-            p2 = list[j].trademark;
-        }
     }
 }

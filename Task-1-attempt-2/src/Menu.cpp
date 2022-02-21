@@ -13,25 +13,24 @@ using namespace menu;
 #define h3 "=================================\n\n"
 
 // Complements main menu
-static int main_menu_body();
+inline int main_menu_body();
 
 // interface to agregate data from console
-static int fillComputerList(ComputerList *);
+inline int fillComputerList(ComputerList *);
 
 // interface to search computers from console
-static void searchComputerById(ComputerList *);
+inline void searchComputerById(ComputerList *);
 
 // interfaces to sort list
-static void sortby_menu(ComputerList *);
-static int sortby_menu_body_1();
-static int sortby_menu_body_2();
+inline void sortby_menu(ComputerList *);
+inline int sortby_menu_body_1();
+inline int sortby_menu_body_2();
 
 // setting for filters
-static void filter_menu(ComputerList *listOfComputers);
+inline void filter_menu(ComputerList *listOfComputers);
 
 // **
-static void print_header();
-
+inline void print_header();
 
 // implementations ------------------------------------------------
 
@@ -44,7 +43,7 @@ void menu::main_menu(ComputerList *listOfComputers)
     while (run)
     {
         opc = main_menu_body();
-        
+
         switch (opc)
         {
         case 1:
@@ -71,7 +70,7 @@ void menu::main_menu(ComputerList *listOfComputers)
     }
 }
 
-static int main_menu_body()
+inline int main_menu_body()
 {
     int opc;
 
@@ -91,7 +90,7 @@ static int main_menu_body()
     return opc;
 }
 
-static int fillComputerList(ComputerList *listOfComputers)
+inline int fillComputerList(ComputerList *listOfComputers)
 {
     int len;
     int alen = listOfComputers->len;
@@ -130,7 +129,7 @@ static int fillComputerList(ComputerList *listOfComputers)
     return len;
 }
 
-static void searchComputerById(ComputerList *listOfComputers)
+inline void searchComputerById(ComputerList *listOfComputers)
 {
     int id;
     int index;
@@ -143,17 +142,17 @@ static void searchComputerById(ComputerList *listOfComputers)
     listOfComputers->print(index);
 }
 
-static void filter_menu(ComputerList *listOfComputers)
+inline void filter_menu(ComputerList *listOfComputers)
 {
 }
 
-static void sortby_menu(ComputerList *listOfComputers)
+inline void sortby_menu(ComputerList *listOfComputers)
 {
     int opc;
     int mode;
 
     opc = sortby_menu_body_1();
-    if (opc == 5)
+    if (opc == 6)
         return;
 
     mode = sortby_menu_body_2();
@@ -163,23 +162,26 @@ static void sortby_menu(ComputerList *listOfComputers)
     switch (opc)
     {
     case 1:
-        listOfComputers->sortByTrademark(mode == 1 ? "a" : "m");
+        listOfComputers->sortByField<pcf::StringFields>(pcf::trademark, mode == 1 ? smallesto : biggesto);
         break;
     case 2:
-        listOfComputers->sortByClockSpeed(mode == 1 ? "a" : "m");
+        listOfComputers->sortByField<pcf::FloatFields>(pcf::clockSpeed, mode == 1 ? smallesto : biggesto);
         break;
     case 3:
-        listOfComputers->sortByMemoryCapacity(mode == 1 ? "a" : "m");
+        listOfComputers->sortByField<pcf::IntFields>(pcf::memoryCapacity, mode == 1 ? smallesto : biggesto);
         break;
     case 4:
-        listOfComputers->sortByStorageCapacity(mode == 1 ? "a" : "m");
+        listOfComputers->sortByField<pcf::IntFields>(pcf::storageCapacity, mode == 1 ? smallesto : biggesto);
+        break;
+    case 5:
+        listOfComputers->sortByField<pcf::IntFields>(pcf::id, mode == 1 ? smallesto : biggesto);
         break;
     default:
         break;
     }
 }
 
-static int sortby_menu_body_1()
+inline int sortby_menu_body_1()
 {
     int opc = 0;
 
@@ -193,7 +195,8 @@ static int sortby_menu_body_1()
         cout << "2. Clock speed\n";
         cout << "3. Memory capacity\n";
         cout << "4. Storage capacity\n";
-        cout << "5. Cancel\n\n";
+        cout << "5. ID\n";
+        cout << "6. Cancel\n\n";
 
         cout << "Option: ";
         cin >> opc;
@@ -202,7 +205,7 @@ static int sortby_menu_body_1()
     return opc;
 }
 
-static int sortby_menu_body_2()
+inline int sortby_menu_body_2()
 {
     int mode = 0;
     while (mode < 1 || mode > 3)
@@ -221,7 +224,7 @@ static int sortby_menu_body_2()
     return mode;
 }
 
-static void print_header()
+inline void print_header()
 {
     cout << h1 << h2 << h3;
 }

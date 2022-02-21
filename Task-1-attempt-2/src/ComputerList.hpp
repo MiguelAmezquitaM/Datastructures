@@ -3,8 +3,10 @@
 
 #include "Computer.hpp"
 
-namespace pcl 
+namespace pcl
 {
+    enum Mode { smallesto, biggesto };
+
     struct ComputerList
     {
         // list
@@ -20,10 +22,8 @@ namespace pcl
         void print(int index);
 
         // sort list by differents properties
-        void sortByTrademark(std::string mode);
-        void sortByClockSpeed(std::string mode);
-        void sortByMemoryCapacity(std::string mode);
-        void sortByStorageCapacity(std::string mode);
+        template<typename T>
+        void sortByField(T field, Mode mode);
 
         // get element by id (return index)
         int searchElementByID(int id);
