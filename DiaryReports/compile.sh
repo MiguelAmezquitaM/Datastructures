@@ -1,0 +1,1 @@
+g++ Report.hpp Report.cpp Console.hpp Console.cpp DiaryReports.hpp DiaryReports.cpp Menu.hpp Menu.cpp main.cpp -o output
