@@ -5,13 +5,10 @@
 #include "Console.hpp"
 #include "DiaryReports.hpp"
 
-class Menu
-{
+class Menu {
     DiaryReports diaryReports;
-    Console console;
 
-    enum Options
-    {
+    enum Options : int {
         agregar_noticia = 1,
         listar_noticias,
         modificar_noticia,
@@ -21,8 +18,8 @@ class Menu
     // Methods
     void print_header() const;
     void print_menu_options() const;
-    void get_option(int &opc) const;
-    void handle_option(int &opc);
+    void get_option(int& opc) const;
+    void handle_option(int& opc);
 
 public:
     void run();

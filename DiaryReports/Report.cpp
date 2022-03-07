@@ -1,64 +1,48 @@
 #include <exception>
-#include <iostream>
 #include "Report.hpp"
 
-StackReports::StackReports() : top(-1)
-{
+// Constructor
+StackReports::StackReports() : top(-1) {
 }
 
-void StackReports::append(Report report)
-{
+void StackReports::append(Report report) {
     stack[++top] = report;
 }
 
-void StackReports::delete_last()
-{
+void StackReports::delete_last() {
     if (!empty())
         top--;
 }
 
-bool StackReports::empty()
-{
+bool StackReports::empty() const {
     return top == -1;
 }
 
-Report *StackReports::get_last()
-{
+Report* StackReports::get_last() {
     if (!empty())
         return &stack[top];
 
     throw "Stack empty";
 }
 
-int StackReports::get_top()
-{
+int StackReports::get_top() const {
     return top;
 }
 
-int StackReports::length()
-{
+int StackReports::length() const {
     return top + 1;
 }
 
-void StackReports::print()
-{
-    for (int i = top; i >= 0; i--)
-    {
-        std::cout << "titulo: " << stack[i].title << "  descripcion: " << stack[i].description << std::endl;
-    }
-}
-
-void StackReports::for_each(CallbackType callback)
-{
+void StackReports::for_each(std::function<void(Report*, int)> callback) {
     StackReports temp;
     int i = 0;
-    
-    while(!empty()) {
+
+    while (!empty()) {
         callback(get_last(), i);
         temp.append(*get_last());
         delete_last();
     }
-    while(!empty()) {
+    while (!temp.empty()) {
         append(*temp.get_last());
         temp.delete_last();
     }

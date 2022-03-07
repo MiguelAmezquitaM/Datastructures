@@ -46,6 +46,5 @@ public:
     PropertiesList();
 };
 
-#include "inmueble.cpp"
 #endif
 

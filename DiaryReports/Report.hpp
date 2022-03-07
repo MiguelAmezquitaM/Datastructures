@@ -3,31 +3,31 @@
 
 #include <iostream>
 #include <string>
+#include <functional>
 
-struct Report
-{
+
+
+struct Report {
     int ref;
     std::string title;
     std::string description;
     std::string type;
 };
 
-typedef void (*CallbackType)(Report *, int);
 
-class StackReports
-{
+
+class StackReports {
     Report stack[100];
     int top;
 
 public:
-    Report *get_last();
-    bool empty();
+    Report* get_last();
+    bool empty() const;
     void delete_last();
     void append(Report report);
-    void print();
-    void for_each(CallbackType callback);
-    int get_top();
-    int length();
+    void for_each(std::function<void(Report*, int)> callback);
+    int get_top() const;
+    int length() const;
 
     StackReports();
 };

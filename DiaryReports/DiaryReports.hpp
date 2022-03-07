@@ -4,11 +4,9 @@
 #include "Report.hpp"
 #include "Console.hpp"
 
-class DiaryReports
-{
+class DiaryReports {
 private:
     StackReports stackReports;
-    Console console;
 
     Report input_report();
     int input_reference();
