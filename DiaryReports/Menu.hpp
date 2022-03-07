@@ -3,10 +3,10 @@
 
 #include "Report.hpp"
 #include "Console.hpp"
-#include "DiaryReports.hpp"
+#include "DailyNews.hpp"
 
 class Menu {
-    DiaryReports diaryReports;
+    DailyNews diaryReports;
 
     enum Options : int {
         agregar_noticia = 1,

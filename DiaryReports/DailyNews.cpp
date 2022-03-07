@@ -1,9 +1,9 @@
-#include "DiaryReports.hpp"
+#include "DailyNews.hpp"
 #include <exception>
 #include <iomanip>
 
-Report DiaryReports::input_report() {
-    Report report;
+BaseNew DailyNews::input_news() {
+    BaseNew report;
 
     console.print("Title: ");
     console.get_string(report.title);
@@ -20,22 +20,22 @@ Report DiaryReports::input_report() {
     return report;
 }
 
-int DiaryReports::input_reference() {
+int DailyNews::input_ref() {
     int ref;
     console.print("Referencia: ");
     console.get_int(ref);
     return ref;
 }
 
-void DiaryReports::insert_report() {
-    Report report = input_report();
-    stackReports.append(report);
+void DailyNews::insert_new() {
+    BaseNew report = input_news();
+    newsStack.append(report);
 }
 
-Report* DiaryReports::get_report_by_ref(int ref) {
-    Report* report = nullptr;
+BaseNew* DailyNews::get_new_by_ref(int ref) {
+    BaseNew* report = nullptr;
 
-    stackReports.for_each([ref, &report](Report* r, int i) {
+    newsStack.for_each([ref, &report](BaseNew* r, int i) {
         if (r->ref == ref) {
             report = r;
         }
@@ -48,12 +48,12 @@ Report* DiaryReports::get_report_by_ref(int ref) {
     return report;
 }
 
-void DiaryReports::modify_report() {
-    int ref = input_reference();
-    Report* r;
+void DailyNews::modify_new() {
+    int ref = input_ref();
+    BaseNew* r;
 
     try {
-        r = get_report_by_ref(ref);
+        r = get_new_by_ref(ref);
     }
     catch (std::logic_error err) {
         console.print(err.what());
@@ -68,14 +68,14 @@ void DiaryReports::modify_report() {
     console.get_string(r->description);
 }
 
-void DiaryReports::print_reports() {
+void DailyNews::print_new() {
     using std::cout;
     using std::setw;
 
     auto sep = setw(30);
 
     cout << sep << "Title" << sep << "Description" << sep << "Type" << sep << "Ref" << "\n\n";
-    stackReports.for_each([sep](Report* rep, int i) {
+    newsStack.for_each([sep](BaseNew* rep, int i) {
         cout << sep << rep->title << sep << rep->description << sep << rep->type << sep << rep->ref << "\n";
         });
     cout << "\n";

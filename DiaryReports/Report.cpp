@@ -2,39 +2,39 @@
 #include "Report.hpp"
 
 // Constructor
-StackReports::StackReports() : top(-1) {
+NewsStack::NewsStack() : top(-1) {
 }
 
-void StackReports::append(Report report) {
+void NewsStack::append(BaseNew report) {
     stack[++top] = report;
 }
 
-void StackReports::delete_last() {
+void NewsStack::delete_last() {
     if (!empty())
         top--;
 }
 
-bool StackReports::empty() const {
+bool NewsStack::empty() const {
     return top == -1;
 }
 
-Report* StackReports::get_last() {
+BaseNew* NewsStack::get_last() {
     if (!empty())
         return &stack[top];
 
     throw "Stack empty";
 }
 
-int StackReports::get_top() const {
+int NewsStack::get_top() const {
     return top;
 }
 
-int StackReports::length() const {
+int NewsStack::length() const {
     return top + 1;
 }
 
-void StackReports::for_each(std::function<void(Report*, int)> callback) {
-    StackReports temp;
+void NewsStack::for_each(std::function<void(BaseNew*, int)> callback) {
+    NewsStack temp;
     int i = 0;
 
     while (!empty()) {

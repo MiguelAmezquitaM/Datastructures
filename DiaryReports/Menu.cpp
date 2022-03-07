@@ -21,16 +21,16 @@ void Menu::handle_option(int& opc) {
     switch (opc) {
     case agregar_noticia:
         console.clear();
-        diaryReports.insert_report();
+        diaryReports.insert_new();
         break;
     case listar_noticias:
         console.clear();
-        diaryReports.print_reports();
+        diaryReports.print_new();
         console.pause();
         break;
     case modificar_noticia:
         console.clear();
-        diaryReports.modify_report();
+        diaryReports.modify_new();
         break;
     default:
         break;
