@@ -44,7 +44,7 @@ void Bank::attend() {
     try {
         client = clientQueue.get();
     }
-    catch (std::exception err) {
+    catch (std::logic_error err) {
         cout << err.what() << "\n";
     }
 
@@ -63,23 +63,32 @@ Client Bank::nextClient() {
 
 void Bank::deleteById(int id) {
     ClientQueue temp;
+    bool deleted = false;
 
     while (!clientQueue.empty() && clientQueue.get().id != id) {
         temp.insert(clientQueue.get());
         clientQueue.pop();
     }
 
-    clientQueue.pop();
+    if(!clientQueue.empty()) {
+        clientQueue.pop();
+        deleted = true;
+    }
 
     while (!temp.empty()) {
         clientQueue.insert(temp.get());
         temp.pop();
     }
+
+    if(deleted) cout << "Eliminado correctamente\n";
+    else cout << "NO existe un cliente con el id: " << id << "\n";
 }
 
-void Bank::print() {
+void Bank::print_queue() {
     clientQueue.print();
-    cout << "Consignments: " << consignments << "\n";
-    cout << "Retirements: " << retirements << "\n";
 }
 
+void Bank::print_balance() {
+    cout << "Retiros: " << retirements << "\n";
+    cout << "Consignaciones: " << consignments << "\n\n";
+}

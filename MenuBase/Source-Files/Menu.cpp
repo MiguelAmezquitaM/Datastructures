@@ -71,3 +71,16 @@ void menu::prompt(string message, int& n) {
     get_int(n);
 }
 
+void menu::clear_console() {
+#if WINDOWS
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+void menu::pause() {
+    cout << "\nPresione una tecla para continuar...";
+    cin.get();
+}
+

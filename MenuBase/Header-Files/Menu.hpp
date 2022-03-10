@@ -19,12 +19,15 @@ namespace menu {
     void prompt(std::string, float&);
 
     template<typename T>
-    static T promptChoices(Choices<T> c);
+    T promptChoices(Choices<T> c);
 
+    void clear_console();
+
+    void pause();
 }
 
 template<typename T>
-static T menu::promptChoices(Choices<T> c) {
+T menu::promptChoices(Choices<T> c) {
     int opc;
 
     std::cout << c.message << "\n\n";
@@ -38,6 +41,7 @@ static T menu::promptChoices(Choices<T> c) {
 
     return c.choices[opc - 1].value;
 }
+
 
 
 

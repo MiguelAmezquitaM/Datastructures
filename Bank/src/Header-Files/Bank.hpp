@@ -15,9 +15,10 @@ namespace bank {
     public:
         void input(Client);
         void attend();
-        Client nextClient();
         void deleteById(int id);
-        void print();
+        void print_queue();
+        void print_balance();
+        Client nextClient();
 
         Bank();
     };
