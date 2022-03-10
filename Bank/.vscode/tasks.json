@@ -11,7 +11,7 @@
                 "${fileDirname}/Source-Files/**.cpp",
                 "${file}",
                 "-o",
-                "${workspaceFolder}/out/output"
+                "${fileDirname}/main"
             ],
             "options": {
                 "cwd": "${fileDirname}"
