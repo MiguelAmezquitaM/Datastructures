@@ -1,0 +1,12 @@
+{
+    "configurations": [
+    {
+        "name": "(gdb) Iniciar",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/out/output",
+        "cwd": "${fileDirname}",
+        "MIMode": "gdb",
+    }
+    ]
+}
