@@ -1,5 +1,1 @@
-./**/**.o
-./**/**.exe
-./**/**.gbc
-./**/.vscode
-./.vscode
+.gitignore
